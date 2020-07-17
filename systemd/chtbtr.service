@@ -1,0 +1,21 @@
+[Unit]
+Description=Server that receives Gerrit hooks and triggers chat messages on a Just Social platform.
+After=gerrit.service
+
+[Service]
+Type=simple
+User=chtbtr
+WorkingDirectory=/opt/chtbtr
+Environment=RUST_LOG=info
+ExecStart=/opt/chtbtr/chtbtr \
+  --data-dir=/opt/chtbtr/data/ \
+  --just-domain=domain \
+  --gerrit-domain=domain \
+  --password=password \
+  --username=user \
+  --chat-bot-profile-id=PROFILE,id
+  --client-id=myclientid \
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,44 @@
+* Purpose
+  
+* Shortcomings
+  
+** Notifications
+
+- Gerrit only reports what a comment changed, not it's status. Ready for submit
+  notifications are difficult, because we usually only learn about a change of
+  verified or code review.
+  
+  In case a reviewer changes both at the same time, a notification should be
+  send though.
+
+** Code
+   
+- Does not implement proper tests, instead relies on API request in makefile
+- There is some mixup with actix, tokio, async_std and reqwest which makes
+  things confusing at times
+- This is a hobby project, structure and quality doesnt necessary follow
+  professional standards
+
+* User settings
+
+User settings are saved in files. Each users has one settings file. Settings
+files are located in the data directory:
+
+~/data/{GerritUsername}/settings.ron~
+
+Every time Chtbtr encounters a new user, a default settings file is written.
+
+* Installation
+1. Copy files to /opt/chtbtr
+2. Create user chtbtr
+   ~adduser --system --no-create-home chtbtr~
+3. Change ownership
+   ~chown -R chtbtr: /opt/chtbtr~
+4. Install service definition
+   ~cp chtbtr.service /etc/systemd/system/chtbtr.service~
+5. Start and check if it works
+   ~systemctl start chtbtr.service~
+   ~systemctl status chtbtr.service~
+6. Enable by default
+   ~systemctl enable chtbtr.service~
+
