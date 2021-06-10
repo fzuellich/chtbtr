@@ -1,19 +1,15 @@
 use crate::types::{BaseData, CommentAddedData, GerritTrigger, PatchStatus, VerifiedStatus};
 
 pub struct NotificationMessageComposer {
-    gerrit_domain: String,
 }
 
 impl NotificationMessageComposer {
-    pub fn create(gerrit_domain: String) -> NotificationMessageComposer {
-        NotificationMessageComposer { gerrit_domain }
+    pub fn create() -> NotificationMessageComposer {
+        NotificationMessageComposer { }
     }
 
     fn generate_patch_url<'a>(&self, base: &'a BaseData) -> String {
-        format!(
-            "https://{}/c/{}/+/{}",
-            self.gerrit_domain, base.project, base.change_url
-        )
+        base.change_url.clone()
     }
 
     fn compose_verified_message(&self, verified: &VerifiedStatus, data: &BaseData) -> String {

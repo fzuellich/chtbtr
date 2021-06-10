@@ -17,7 +17,6 @@ pub async fn patch_status_changed(
     data: &PatchStatusChangedData,
 ) -> Result<(), ControllerError> {
     let acteur = state.acteur.clone();
-    let domain = state.connection.gerrit_domain.clone();
     let owner = &data.base.change_owner;
     let username = &data.base.change_owner_username;
 
@@ -26,7 +25,7 @@ pub async fn patch_status_changed(
 
     check_notification_settings(&settings, data)?;
 
-    let message = NotificationMessageComposer::create(domain).compose(&trigger)?;
+    let message = NotificationMessageComposer::create().compose(&trigger)?;
     debug!("Message is composed. Dispatching actor message to trigger chat message dispatch.");
     acteur
         .send_to_service::<JustClient, SendChatMessage>(SendChatMessage(profile_id, message))

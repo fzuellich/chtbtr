@@ -1,6 +1,6 @@
 [package]
 name = "chtbtr"
-version = "1.5.0"
+version = "1.5.1"
 authors = ["fzuellich <fzuellich@users.noreply.github.com>"]
 edition = "2018"
 default-run= "chtbtr"
