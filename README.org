@@ -1,4 +1,9 @@
-* Purpose
+* Requirements
+
+- musl
+- openssl
+- musl target for the Rust toolchain: ~rustup target add
+  x86_64-unknown-linux-musl~
   
 * Shortcomings
   

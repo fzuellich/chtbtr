@@ -131,7 +131,7 @@ test_reviewer_added : # +1 and +2 for patch
 		--reviewer-username "fzuellich"
 
 deploy : # Deploy to production
-	cargo build --release \
+	cargo build --release --target x86_64-unknown-linux-musl \
 		&& ssh root@$$GERRIT_TEST_DOMAIN "systemctl stop chtbtr" \
 		&& scp target/release/chtbtr root@$$GERRIT_TEST_DOMAIN:/opt/chtbtr/chtbtr \
 		&& ssh root@$$GERRIT_TEST_DOMAIN "chown chtbtr: /opt/chtbtr/chtbtr" \
